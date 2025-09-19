@@ -1,0 +1,12 @@
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: first baseline;
+
+    .error-icon { 
+        width: 14px;
+        height: 14px;
+
+        padding-right: 2px;
+    }
+}

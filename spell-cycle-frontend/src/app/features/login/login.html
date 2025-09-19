@@ -1,0 +1,70 @@
+<div class="login-form-container">
+    <div class="glass">
+        <form class="login-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+            <div class="upper-div">
+                <div class="login-form-header form-header">
+                    <h2 class="title">
+                        Login
+                    </h2>
+                </div>
+
+                <div class="form-input-wrapper">
+                    <div class="email-input-wrapper">
+                        <label for="email">Email</label>
+                        <input placeholder="" type="email" formControlName="email" autocomplete="email" />
+
+                        @if (form.controls.email.touched && form.controls.email.invalid) {
+                            <small class="err">
+                                @if (form.controls.email.errors?.['required']) { 
+                                    <app-error-message [message]="'Email is required.'"/>
+                                }
+                                @if (form.controls.email.errors?.['email']) { 
+                                    <app-error-message [message]="'Enter a valid email.'"/>
+                                }
+                            </small>
+                        }
+                    </div>
+
+                    <div class="password-input-wrapper">
+                        <label for="password">Password</label>
+                        <input placeholder="" type="password" formControlName="password" autocomplete="current-password" />
+
+                        @if (form.controls.password.touched && form.controls.password.invalid) {
+                            <small class="err">
+                                <app-error-message [message]="'Password is required.'"/>
+                            </small>
+                        }
+                    </div>
+                </div>
+
+                @if (form.errors?.['auth']) {
+                    <div class="err">
+                        <app-error-message [message]="'Invalid email or password.'"/>
+                    </div>
+                }
+            </div>
+
+
+            <button class="login-btn" type="submit" [disabled]="form.invalid || loading">
+                {{ loading ? 'Logging in…' : 'Login' }}
+            </button>
+        </form>
+    </div>
+
+    <!-- <div class="lower-banner-wrapper">
+        <div class="lower-banner">
+            <div class="err">
+                <app-error-message [message]="'For employees only.'"/>
+            </div>
+            <div>
+                <span>
+                    Back to
+                </span>
+                <a routerLink="/landing">
+                    Landing
+                </a>
+            </div>
+        </div>
+    </div> -->
+</div>

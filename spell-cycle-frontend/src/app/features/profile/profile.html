@@ -1,0 +1,326 @@
+<div class="under-header-container">
+    <div class="left-side-container glass">
+
+    </div>
+    <div class="right-side-container glass">
+        <form class="profile-form" [formGroup]="form" (ngSubmit)="submit()">
+
+            <div class="profile-form-header">
+                <div class="profile-header-wrapper form-header">
+                    <h2 class="title profile-title">
+                        Profile
+                    </h2>
+                    <button 
+                        class="edit-button regular-on-hover-underline"
+                        type="button"
+                        (click)="toggleEdit()"
+                    >
+                        <mat-icon 
+                            class="edit-icon"
+                            [class]="edit() ? 'green-edit-icon' : ''"
+                            svgIcon="edit" 
+                            aria-hidden="false" 
+                            aria-label="edit icon">
+                        </mat-icon>
+
+                        <!-- <p class="medium-text" >
+                            @if (edit()) {
+                                Editing
+                            } @else {
+                                Edit
+                            }
+                        </p> -->
+                    </button>
+                </div>
+            </div>
+
+            <!-- <div class="form-input-wrapper">
+                <label for="email">Email</label>
+                <input 
+                    placeholder="" 
+                    value="dron.home13@gmail.com" 
+                    type="email" formControlName="email" 
+                    autocomplete="email" 
+                    [disabled]="!edit()"
+                />
+            </div> -->
+
+            <div class="form-input-wrapper">
+                <div class="first-name-input-wrapper">
+                    <label for="firstName">First name</label>
+                    <input 
+                        value="Andrii"
+                        placeholder="" 
+                        type="text" 
+                        formControlName="firstName" 
+                        autocomplete="given-name" 
+                        [disabled]="!edit()"
+                    />
+
+                    <!-- @if (form.controls.firstName.touched && form.controls.firstName.invalid) {
+                        <small class="err">
+                            <app-error-message [message]="'Fisrt name is required.'"/>
+                        </small>
+                    } -->
+                </div>
+
+                <div class="last-name-input-wrapper">
+                    <label for="lastName">Last name</label>
+                    <input 
+                        value="Kostiushko"
+                        placeholder="" 
+                        type="text" 
+                        formControlName="lastName" 
+                        autocomplete="family-name" 
+                        [disabled]="!edit()"
+                    />
+
+                    <!-- @if (form.controls.lastName.touched && form.controls.lastName.invalid) {
+                        <small class="err">
+                            <app-error-message [message]="'Last name is required.'"/>
+                        </small>
+                    } -->
+                </div>
+
+                <div class="email-input-wrapper">
+                    <label for="email">Email</label>
+                    <input 
+                        placeholder="" 
+                        value="dron.home13@gmail.com" 
+                        type="email" formControlName="email" 
+                        autocomplete="email" 
+                        [disabled]="!edit()"
+                    />
+
+                    <!-- @if (form.controls.email.touched && form.controls.email.invalid) {
+                        <small class="err">
+                            @if (form.controls.email.errors?.['required']) { 
+                                <app-error-message [message]="'Email is required.'"/>
+                            }
+                            @if (form.controls.email.errors?.['email']) { 
+                                <app-error-message [message]="'Enter a valid email.'"/>
+                            }
+                        </small>
+                    } -->
+                </div>
+
+                <div class="roles-wrapper">
+                    <div class="basic-roles-wrapper">
+                        <label for="basicRoles">Basic role</label>
+                        <div class="roles_grid">
+                            @for (r of basicRoles; track r.key) {
+                                <button
+                                    type="button"
+                                    class="role-tile"
+                                    [class.selected]="isSelectedBasic(r.key)"
+                                    (click)="toggleRole(r.key)"
+                                    aria-pressed="{{ isSelectedBasic(r.key) }}"
+                                    [disabled]="!edit()"
+                                >
+                                    <mat-icon [svgIcon]="r.icon"></mat-icon>
+                                    <span class="label">{{ r.label }}</span>
+                                </button>
+                            }
+                        </div>
+
+                        <!-- @if ((form.controls.basicRoles.touched || form.controls.basicRoles.dirty) && form.controls.basicRoles.invalid) {
+                            <small class="err">
+                                <app-error-message [message]="'At least one basic role has to be selected.'"/>
+                            </small>
+                        } -->
+                    </div>
+
+                    <div class="extra-roles-wrapper">
+                        <label for="extraRoles">Extra roles</label>
+                        <div class="roles_grid">
+                            @for (r of extraRoles; track r.key) {
+                                <button
+                                    type="button"
+                                    class="role-tile"
+                                    [class.selected]="isSelectedExtra(r.key)"
+                                    (click)="toggleRole(r.key)"
+                                    aria-pressed="{{ isSelectedExtra(r.key) }}"
+                                    [disabled]="!edit()"
+                                >
+                                    <mat-icon [svgIcon]="r.icon"></mat-icon>
+                                    <span class="label">{{ r.label }}</span>
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-number-input-wrapper">
+                    <label for="mobile-number">Mobile number</label>
+                    <input
+                        placeholder="" 
+                        value="+380 93 457 33 61" 
+                        type="tel" formControlName="mobileNumber" 
+                        autocomplete="tel" 
+                        [disabled]="!edit()"
+                    />
+
+                    <!-- @if (form.controls.email.touched && form.controls.email.invalid) {
+                        <small class="err">
+                            @if (form.controls.email.errors?.['required']) { 
+                                <app-error-message [message]="'Email is required.'"/>
+                            }
+                            @if (form.controls.email.errors?.['email']) { 
+                                <app-error-message [message]="'Enter a valid email.'"/>
+                            }
+                        </small>
+                    } -->
+                </div>
+
+                <div class="birth-date-input-wrapper">
+                    <label for="birth-date">Birth date</label>
+                    <input
+                        type="text"
+                        value="2004-12-13"
+                        placeholder=""
+                        formControlName="birthDate"
+                        autocomplete="bday"
+                        pattern="\d{4}-\d{2}-\d{2}"
+                        [disabled]="!edit()"
+                    />
+
+                    <!-- @if (form.controls.email.touched && form.controls.email.invalid) {
+                        <small class="err">
+                            @if (form.controls.email.errors?.['required']) { 
+                                <app-error-message [message]="'Email is required.'"/>
+                            }
+                            @if (form.controls.email.errors?.['email']) { 
+                                <app-error-message [message]="'Enter a valid email.'"/>
+                            }
+                        </small>
+                    } -->
+                </div>
+
+                <label for="sex">Sex</label>
+                <div class="select-wrapper">
+                    <select
+                        id="sex"
+                        formControlName="sex"
+                        [disabled]="!edit()"
+                    >
+                        <button><selectedcontent></selectedcontent></button>
+                        <option [ngValue]="null" disabled>
+                            <p class="regular-text">
+                                Select sex
+                            </p>
+                        </option>
+
+                        @for (opt of sexOptions; track opt.value) {
+                            <option [value]="opt.value">
+                                <div class="option-field">
+                                    <!-- <mat-icon 
+                                        [svgIcon]="opt.value == null ? '' : opt.value" 
+                                        aria-hidden="false" 
+                                        aria-label="gender icon">
+                                    </mat-icon> -->
+                                    <!-- <img class="flag-icon" [src]="opt.url" alt="My Icon" /> -->
+                                    @if (opt.value == 'female') {
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-120v-80h-80v-80h80v-84q-79-14-129.5-75.5T260-582q0-91 64.5-154.5T480-800q91 0 155.5 63.5T700-582q0 81-50.5 142.5T520-364v84h80v80h-80v80h-80Zm40-320q58 0 99-41t41-99q0-58-41-99t-99-41q-58 0-99 41t-41 99q0 58 41 99t99 41Z"/></svg>
+                                    } @else if (opt.value == 'male') {
+                                        <svg 
+                                            xmlns="http://www.w3.org/2000/svg" 
+                                            height="24px" 
+                                            viewBox="0 -960 960 960" 
+                                            width="24px" 
+                                            fill="#e3e3e3">
+                                            <path 
+                                                d="M800-800v240h-80v-103L561-505q19 28 29 59.5t10 65.5q0 92-64 156t-156 64q-92 0-156-64t-64-156q0-92 64-156t156-64q33 0 65 9.5t59 29.5l159-159H560v-80h240ZM380-520q-58 0-99 41t-41 99q0 58 41 99t99 41q58 0 99-41t41-99q0-58-41-99t-99-41Z"
+                                            />
+                                        </svg>
+                                    }
+                                    <p class="regular-text">
+                                        {{ opt.label }}
+                                    </p>
+                                </div>
+                            </option>
+                        }
+                    </select>
+                </div>
+
+
+                <label for="citizenship">Citizenship</label>
+                <div class="select-wrapper">
+                    <select
+                        id="citizenship"
+                        formControlName="citizenship"
+                        [disabled]="!edit()"
+                    >
+                        <button><selectedcontent></selectedcontent></button>
+                        <option [ngValue]="null" disabled>
+                            <p class="regular-text">
+                                Select citizenship
+                            </p>
+                        </option>
+
+                        @for (opt of citizenshipOptions; track opt.code) {
+                            <option [value]="opt.code">
+                                <div class="option-field">
+                                    <img class="flag-icon" [src]="opt.url" alt="My Icon" />
+                                    <p class="regular-text">
+                                        {{ opt.label }}
+                                    </p>
+                                </div>
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <label for="canSeeContacts">Can see your contacts</label>
+                <div class="select-wrapper">
+                    <select
+                        id="canSeeContacts"
+                        formControlName="canSeeContacts"
+                        [disabled]="!edit()"
+                    >
+                        <button><selectedcontent></selectedcontent></button>
+                        <option [ngValue]="null" disabled>
+                            <p class="regular-text">
+                                Select who can see your contacts
+                            </p>
+                        </option>
+
+                        @for (opt of canSeeContactsOptions; track opt.value) {
+                            <option [value]="opt.value">
+                                <div class="option-field">
+                                    <!-- <img class="flag-icon" [src]="opt.url" alt="My Icon" /> -->
+                                    @if (opt.value == 'public') {
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q41-45 62.5-100.5T800-480q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z"/></svg>
+                                    } @else if (opt.value == 'private') {
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q32 0 61.5 4.5T600-862v102q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q27 0 47.5 16t28.5 40q39-44 61.5-98.5T800-480q0-11-1-20t-3-20h82q2 11 2 20v20q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 124 80.5 213.5T440-162Zm280-438q-17 0-28.5-11.5T680-640v-120q0-17 11.5-28.5T720-800v-40q0-33 23.5-56.5T800-920q33 0 56.5 23.5T880-840v40q17 0 28.5 11.5T920-760v120q0 17-11.5 28.5T880-600H720Zm40-200h80v-40q0-17-11.5-28.5T800-880q-17 0-28.5 11.5T760-840v40Z"/></svg>
+                                    }
+                                    <p class="regular-text">
+                                        {{ opt.label }}
+                                    </p>
+                                </div>
+                            </option>
+                        }
+                    </select>
+                </div>
+
+
+
+                <!-- <div class="password-input-wrapper">
+                    <label for="password">Password</label>
+                    <input 
+                        placeholder="" 
+                        type="password" 
+                        formControlName="password" 
+                        autocomplete="new-password" 
+                    />
+
+                    @if (form.controls.password.touched && form.controls.password.invalid) {
+                        <small class="err">
+                            <app-error-message [message]="'Password is required.'"/>
+                        </small>
+                    }
+                </div> -->
+            </div>
+
+        </form>
+    </div>
+</div>

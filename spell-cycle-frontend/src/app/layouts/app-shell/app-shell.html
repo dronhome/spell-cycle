@@ -1,0 +1,53 @@
+<header class="navbar">
+    <div class="glass">
+        <div class="header-surface">
+            <div class="left-side">
+                <a routerLink="/landing">
+                    <mat-icon class="cycle-icon"
+                        svgIcon="cycle" 
+                        aria-hidden="false" 
+                        aria-label="cycle icon">
+                    </mat-icon>
+                </a>
+            </div>
+            <div class="login-side">
+                @if (!auth.isLoggedIn()) {
+                    <a class="profile-field regular-on-hover-underline" routerLink="/profile/{{ userId() }}">
+                        <mat-icon 
+                            class="role-icon" 
+                            [svgIcon]="role_icon()"
+                        />
+                        <p class="regular-text">
+                            {{ firstName() }} {{ lastName() }}
+                        </p>
+                    </a>
+                    <!-- <button type="button" (click)="onLogout()">
+                        Logout
+                    </button>
+                    <p>{{ auth.user()?.email }}</p> -->
+                } @else {
+                    <a class="login-link regular-on-hover-underline" routerLink="/auth/login">
+                        <p class="regular-text">
+                            Login
+                        </p>
+                        <!-- <mat-icon 
+                            svgIcon="login" 
+                            aria-hidden="false" 
+                            aria-label="login icon">
+                        </mat-icon> -->
+                    </a>
+                }
+            </div>
+        </div>
+        <!-- <mat-toolbar routerLink="/landing">
+            <mat-icon svgIcon="cycle" aria-hidden="false" aria-label="cycle icon"></mat-icon>
+
+            <span>Spell Cycle</span>
+
+        </mat-toolbar> -->
+    </div>
+</header>
+
+<main>
+    <router-outlet />
+</main>

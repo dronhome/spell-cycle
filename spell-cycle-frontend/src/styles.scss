@@ -1,0 +1,300 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use 'styles/mixins' as ui;
+
+html {
+    @include mat.theme((
+        color: (
+            primary: mat.$cyan-palette,
+            tertiary: mat.$orange-palette,
+        ),
+        typography: Roboto,
+        density: 0,
+    ));
+}
+
+body {
+    // Default the application to a light color theme. This can be changed to
+    // `dark` to enable the dark color theme, or to `light dark` to defer to the
+    // user's system settings.
+    color-scheme: dark;
+
+    // Set a default background, font and text colors for the application using
+    // Angular Material's system-level CSS variables. Learn more about these
+    // variables at https://material.angular.dev/guide/system-variables
+    // background-color: var(--mat-sys-surface);
+
+    background-image: url('/icons/bg-2.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;  
+
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-medium);
+
+    // Reset the user agent margin.
+}
+
+// variables ->
+
+$text-primary-color: #e0e3e2;
+$elements-primary-color: #004f4f;
+$background-color: #101414;
+
+// <-
+
+
+
+html, body { height: 100%; }
+app-root { display: block; height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px) saturate(1.2);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: none;
+
+    border: 1px solid var(--mat-sys-on-surface-variant);
+    background-color: var(--mat-sys-on-secondary-fixed-variant);
+    color: var(--mat-sys-inverse-surface);
+
+    &:disabled {
+        // font-weight: 400;
+        background-color: var(--mat-sys-on-secondary-fixed-variant);
+        color: var(--mat-sys-on-surface-variant);
+        cursor: not-allowed;
+        // border: 1px solid var(--mat-sys-on-surface-variant);
+    }
+
+    &:hover {
+        opacity: 70%;
+    }
+}
+
+.regular-text {
+    font-weight: 400;
+    font-size: 1rem;
+    color: $text-primary-color;
+    margin: 0;
+} 
+
+.regular-on-hover-underline {
+    color: $text-primary-color;
+
+    border-bottom: 1px solid transparent !important;
+
+    &:hover {
+        border-bottom: 1px solid !important;
+    }
+}
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-left-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.err {
+    color: var(--mat-sys-error)
+}
+
+.form-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-input-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.medium-text {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $text-primary-color;
+    // height: 100%;
+}
+
+input {
+    @include ui.input-reset;
+
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--mat-sys-on-secondary-container);
+    box-sizing: border-box;
+    margin-bottom: 6px;
+
+    font-size: 1rem;
+
+    &:focus {
+        outline: none;
+        color: var(--mat-sys-inverse-surface);
+    }
+
+    &::placeholder {
+        font-style: italic;
+    }
+}
+
+label {
+    font-size: 1rem;
+    padding-left: 10px;
+    opacity: 70%;
+}
+
+
+
+.cycle-icon {
+    width: 40px !important;
+    height: 40px !important;
+
+    opacity: 80% !important;
+}
+
+.under-header-container {
+    width: 100vw;
+    height: 94vh;
+    padding: 2vw 3vw;
+}
+
+.no-header-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 0 3vw;
+}
+
+.flag-icon {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+
+    select {
+        width: 100%;
+        padding: 10px 2.25rem 10px 12px;
+        border: none;
+        border-bottom: 1px solid var(--mat-sys-on-secondary-container);
+        border-radius: 0;
+        background-color: transparent;
+
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            // opacity: 0.9;
+            cursor: not-allowed;
+        }
+
+        &.ng-invalid.ng-touched {
+            border-color: var(--mat-sys-error);
+            box-shadow: 0 0 0 3px color-mix(in oklab, var(--mat-sys-error) 25%, transparent);
+        }
+
+        &:focus {
+            outline: none;
+            cursor: pointer;
+        }
+
+        
+
+        option {
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 0;
+            background-color: #373c3c;
+            line-height: 3.0;
+
+            padding: 0 20px;
+
+            &:checked {
+                background-color: #373c3c94;
+            }
+
+            &:hover {
+                background: $elements-primary-color;
+                cursor: pointer;
+                background-color: #373c3c94;
+            }
+
+            &::checkmark {
+                order: 1;
+                margin-left: auto;
+                content: "";
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url("/icons/square.png") no-repeat center/contain;
+            }
+        }
+    }
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+    border: none;
+}
+
+select::picker-icon {
+    color: #999999;
+    transition: 0.4s rotate;
+}
+select:open::picker-icon {
+    rotate: 180deg;
+}
+::picker(select) {
+    border: none;
+}
+
+.option-field {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+input {
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
